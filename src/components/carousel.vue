@@ -1,17 +1,7 @@
 <template>
   <swiper :options="swiperOption">
-    <swiper-slide>
-      <img src="@/image/carousel/num1.jpg" alt=""></swiper-slide>
-    <swiper-slide>
-      <img src="@/image/carousel/num2.jpg" alt=""></swiper-slide>
-    <swiper-slide>
-      <img src="@/image/carousel/num3.jpg" alt=""></swiper-slide>
-    <swiper-slide>
-      <img src="@/image/carousel/num4.jpg" alt=""></swiper-slide>
-    <swiper-slide>
-      <img src="@/image/carousel/num5.jpg" alt=""></swiper-slide>
-    <swiper-slide>
-      <img src="@/image/carousel/num6.jpg" alt=""></swiper-slide>
+    <swiper-slide v-for="banner in banners">
+      <img :src="banner.imageUrl" alt=""></swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </template>
@@ -26,6 +16,7 @@ export default {
   },
   data() {
     return {
+      banners: {},
       swiperOption: {
         pagination: {
           el: '.swiper-pagination'
@@ -33,13 +24,21 @@ export default {
         autoplay: true
       }
     }
+  },
+  created: function() {
+    console.log('dakjdhj')
+
+    this.$http.banner().then(res => {
+      this.banners = res.data.banners
+      console.log(this.banners)
+    })
   }
 }
 </script>
 <style  lang="scss">
 .swiper-slide {
   width: 100%;
-  height: 160px;
+  height: 130px;
   background-image: linear-gradient(to top, #fff 0%, #fff 40%, #d43c33 40%, #d43c33 100%);
   img {
     border-radius: 4px;

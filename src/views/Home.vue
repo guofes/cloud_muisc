@@ -56,34 +56,12 @@
 
         <div class="remd">
           <div class="remd_ul">
-            <div class="remd_li">
-              <img src="@/image//song_list/li1.jpg" alt="">
-              <p>"要做什么梦是每个人的自由"</p>
-            </div>
-            <div class="remd_li">
-              <img src="@/image//song_list/li2.jpg" alt="">
-              <p>昨夜西风凋碧树，醒来我想买秋裤</p>
-            </div>
-            <div class="remd_li">
-              <img src="@/image//song_list/li3.jpg" alt="">
-              <p>[超燃史诗&节奏电音]运动/健身游戏必备</p>
+            <div class="remd_li" v-for="(item, index) in remdlist">
+              <img v-if="index<6" :src="item.picUrl">
+              <p v-if="index<6">"{{item.name}}"</p>
             </div>
           </div>
 
-          <div class="remd_ul">
-            <div class="remd_li">
-              <img src="@/image//song_list/li4.jpg" alt="">
-              <p>震撼心灵的史诗音乐</p>
-            </div>
-            <div class="remd_li">
-              <img src="@/image//song_list/li5.jpg" alt="">
-              <p>攒了一大堆好听的歌想和你听</p>
-            </div>
-            <div class="remd_li">
-              <img src="@/image//song_list/li6.jpg" alt="">
-              <p>[出场BGM]在我的出场音乐里我才是无敌的</p>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -142,6 +120,20 @@ export default {
   components: {
     PlayFooter,
     carousel
+  },
+  data() {
+    return {
+      remdlist: {}
+    }
+  },
+  created: function() {
+    // `this` 指向 vm 实例
+    console.log('zhixing')
+
+    this.$http.personalized().then(res => {
+      this.remdlist = res.data.result
+      console.log(this.remdlist)
+    })
   }
 }
 </script>
@@ -233,7 +225,8 @@ header {
   }
   .remd_ul {
     display: flex;
-    // justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
     .remd_li {
       img {
@@ -242,6 +235,7 @@ header {
       }
       p {
         font-size: 0.5em;
+        width: 32vw;
       }
     }
   }

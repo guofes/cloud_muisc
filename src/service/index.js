@@ -1,17 +1,15 @@
 import axios from 'axios'
-// let port = 3000
-// let host = '://localhoost:' + port
-// let baseURL = 'http' + host
+import api from './api'
+
+
 const REQUEST_METHOD_MAP = {
   POST: 'post',
   GET: 'get'
 }
-const api_name = [{
-  subUrl: 'search',
-  name: 'search',
-  method: REQUEST_METHOD_MAP.POST,
-  module: 'instopencallback'
-}]
+// let port = 3000
+// let host = '://localhoost:' + port
+// let baseURL = 'http' + host
+let api_name = [...api, ]
 let baseURL = '/api'
 let axiosConfig = {
   baseURL,
@@ -20,16 +18,11 @@ let axiosConfig = {
     'Content-Type': 'application/json;charset=UTF-8'
   },
 }
-let instanceTmp = axios.create(axiosConfig)
-// export default {
-//   getAxios: instanceTmp,
-//   getCancelToken: axios.CancelToken
-// }
 
 function Service() {
   // let services = []
   let _this = this
-  let _http = axios.create(instanceTmp)
+  let _http = axios.create(axiosConfig)
 
 
   // search = params => {

@@ -1,8 +1,9 @@
 <template>
   <div class="lizi">
     vuex数据测试页面
-    <button @click='onEvenuateSubmit'>提交</button>
-    <button @click='test_search'>测试</button>
+    <div @click='onEvenuateSubmit'>热门搜索</div>
+    <div @click='test_search'>搜索</div>
+    <div @click='personalized'>推荐歌单</div>
   </div>
 </template>
 <script>
@@ -13,23 +14,40 @@ export default {
       // http: Httpservice.getAxios
     }
   },
+  // created: {
+  //   function() {
+  //     // `this` 指向 vm 实例
+  //     console.log('直接调用')
+  //   }
+  // },
   methods: {
     onEvenuateSubmit() {
-      console.log('aaa')
-    },
-    test_search() {
-      console.log('dasd')
-      this.$http.search().then(res => {
+      console.log('热门搜索')
+      this.$http.hot().then(res => {
         console.log(res)
       })
-    }
+    },
+    test_search() {
+      console.log('搜索')
+      const val = { keywords: 'ad' }
+      this.$http.search(val).then(res => {
+        console.log(res)
+      })
+    },
+    personalized() {
+      console.log('推荐歌单')
+      this.$http.personalized().then(res => {
+        console.log(res)
+      })
+    },
 
-    // beforeRouteEnter(to, from, next) {
-    //   next(vm => {
-    //     // vm.isShowPage = false
-    //     vm.test_search()
-    //   })
-    // }
+    beforeRouteEnter(to, from, next) {
+      personalized()
+      // next(vm => {
+      //   // vm.isShowPage = false
+      //   vm.test_search()
+      // })
+    }
   }
 }
 </script>

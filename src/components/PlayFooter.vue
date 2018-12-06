@@ -1,5 +1,8 @@
 <template>
   <div class="play_footer">
+    <audio autoplay="true">
+      <source :src="audioUrl" type="audio/mpeg">
+    </audio>
     <img src="@/image/song_list/li5.jpg" alt="">
     <div class="tip">
       <p>不为谁而做的歌</p>
@@ -22,9 +25,22 @@
 
 <script>
 export default {
-  name: 'PlayFooter'
+  name: 'PlayFooter',
   // props: {
   //   msg: String
+  // }
+  data() {
+    return {
+      audioUrl: 'https://music.163.com/song?id=28285910&userid=349661708'
+    }
+  }
+  // created: function() {
+  //   console.log('播放')
+
+  //   this.$http.banner().then(res => {
+  //     this.banners = res.data.banners
+  //     console.log(this.banners)
+  //   })
   // }
 }
 </script>

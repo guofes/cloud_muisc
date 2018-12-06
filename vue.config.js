@@ -22,10 +22,11 @@ module.exports = {
     disableHostCheck: true,
     inline: true,
     proxy: {
-      '/api': {
-        target: 'localhost:3000',
+      '/api/*': {
+        target: 'http://localhost:3000',
+        changeOrigin: true, //是否跨域
         pathRewrite: {
-          "^/api": ""
+          '^/api': '' //需要rewrite的,
         }
         // changeOrigin: true,
         // logLevel: 'debug',
